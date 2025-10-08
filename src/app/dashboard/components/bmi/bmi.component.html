@@ -1,0 +1,100 @@
+<div class="container mt-4" style="max-width: 600px;">
+  <h4 class="text-center mb-4">BMI & BSA
+      <i
+    class="bi bi-info-circle ms-2"
+    tabindex="0"
+    role="button"
+    data-bs-toggle="tooltip"
+    data-bs-placement="right"
+    data-bs-html="true"
+    title="
+    <strong>Facts &amp; Figures</strong><br>
+    The Cockcroft-Gault formula estimates creatinine clearance to clinically approximate GFR. It may over-estimate GFR by 10-20%.<br><br>
+    <strong>Weight Guidelines:</strong><br>
+    - Underweight (BMI &lt;18.5): Use actual body weight<br>
+    - Normal (BMI 18.5–24.9): Use ideal body weight<br>
+    - Overweight/Obese (BMI ≥25): Use adjusted body weight
+    "
+  ></i>
+  </h4>
+
+  <form (ngSubmit)="calculate()" #form="ngForm">
+   
+
+    <!-- Height -->
+    <div class="row align-items-center mb-3">
+      <label class="col-5 col-form-label">Height</label>
+      <div class="col-7 position-relative">
+        <input
+          type="number"
+          class="form-control pe-5"
+          [(ngModel)]="height"
+          name="height"
+          required
+        />
+        <span
+          class="unit-toggle me-3"
+          (click)="toggleHeightUnit()"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #0d6efd;"
+        >
+          {{ heightUnit }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Weight -->
+    <div class="row align-items-center mb-3">
+      <label class="col-5 col-form-label">Weight</label>
+      <div class="col-7 position-relative">
+        <input
+          type="number"
+          class="form-control pe-5"
+          [(ngModel)]="weight"
+          name="weight"
+          required
+        />
+        <span
+          class="unit-toggle me-3"
+          (click)="toggleWeightUnit()"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #0d6efd;"
+        >
+          {{ weightUnit }}
+        </span>
+      </div>
+    </div>
+
+
+    <div class="row align-items-center mb-3">
+      <label class="col-5 col-form-label">Target BMI</label>
+      <div class="col-7 position-relative">
+        <input
+          type="number"
+          class="form-control pe-5"
+          [(ngModel)]="targetBMI"
+          name="Target BMI"
+        />
+        <span
+          class="unit-toggle me-3"
+          
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #0d6efd;"
+        >
+          kg/m²
+        </span>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button class="btn btn-primary w-100 mt-3" type="submit">Calculate</button>
+  </form>
+
+  <!-- Result -->
+<div *ngIf="result !== null" class="alert alert-info mt-4 text-center">
+  <div><strong>BMI:</strong> {{ result.bmi.toFixed(2) }} kg/m²</div>
+  <div><strong>BSA:</strong> {{ result.bsa.toFixed(2) }} m²</div>
+  <div *ngIf="result.targetWeightKg !== undefined">
+    <strong>Target Weight:</strong> {{ result.targetWeightKg.toFixed(2) }} kg for BMI {{ targetBMI }} kg/m²
+  </div>
+</div>
+
+
+</div>

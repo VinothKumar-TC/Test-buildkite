@@ -1,0 +1,136 @@
+<div class="container mt-4" style="max-width: 600px;">
+  <h4 class="text-center mb-4">Creatinine Clearance Calculator
+      <i
+    class="bi bi-info-circle ms-2"
+    tabindex="0"
+    role="button"
+    data-bs-toggle="tooltip"
+    data-bs-placement="right"
+    data-bs-html="true"
+    title="
+    <strong>Facts &amp; Figures</strong><br>
+    The Cockcroft-Gault formula estimates creatinine clearance to clinically approximate GFR. It may over-estimate GFR by 10-20%.<br><br>
+    <strong>Weight Guidelines:</strong><br>
+    - Underweight (BMI &lt;18.5): Use actual body weight<br>
+    - Normal (BMI 18.5–24.9): Use ideal body weight<br>
+    - Overweight/Obese (BMI ≥25): Use adjusted body weight
+    "
+  ></i>
+  </h4>
+
+  <form (ngSubmit)="calculate()" #form="ngForm">
+    <!-- Gender -->
+    <div class="row align-items-center mb-3">
+      <div class="col-5 col-form-label">Gender</div>
+      <div class="col-7">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            [(ngModel)]="gender"
+            value="male"
+            required
+          />
+          <label class="form-check-label">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            [(ngModel)]="gender"
+            value="female"
+          />
+          <label class="form-check-label">Female</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Age -->
+    <div class="row align-items-center mb-3">
+      <label class="col-5 col-form-label">Age (years)</label>
+      <div class="col-7">
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="age"
+          name="age"
+          required
+        />
+      </div>
+    </div>
+
+    <!-- Height -->
+    <div class="row align-items-center mb-3">
+      <label class="col-5 col-form-label">Height</label>
+      <div class="col-7 position-relative">
+        <input
+          type="number"
+          class="form-control pe-5"
+          [(ngModel)]="height"
+          name="height"
+          required
+        />
+        <span
+          class="unit-toggle me-3"
+          (click)="toggleHeightUnit()"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #0d6efd;"
+        >
+          {{ heightUnit }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Weight -->
+    <div class="row align-items-center mb-3">
+      <label class="col-5 col-form-label">Weight</label>
+      <div class="col-7 position-relative">
+        <input
+          type="number"
+          class="form-control pe-5"
+          [(ngModel)]="weight"
+          name="weight"
+          required
+        />
+        <span
+          class="unit-toggle me-3"
+          (click)="toggleWeightUnit()"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #0d6efd;"
+        >
+          {{ weightUnit }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Creatinine -->
+    <div class="row align-items-center mb-3">
+      <label class="col-5 col-form-label">Serum Creatinine</label>
+      <div class="col-7 position-relative">
+        <input
+          type="number"
+          step="0.01"
+          class="form-control pe-5"
+          [(ngModel)]="creatinine"
+          name="creatinine"
+          required
+        />
+        <span
+          class="unit-toggle me-1"
+          (click)="toggleCreatinineUnit()"
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #0d6efd;"
+        >
+          {{ creatinineUnit }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button class="btn btn-primary w-100 mt-3" type="submit">Calculate</button>
+  </form>
+
+  <!-- Result -->
+  <div *ngIf="result !== null" class="alert alert-info mt-4 text-center">
+    <strong>Creatinine Clearance:</strong> {{ result.toFixed(2) }} mL/min
+  </div>
+</div>

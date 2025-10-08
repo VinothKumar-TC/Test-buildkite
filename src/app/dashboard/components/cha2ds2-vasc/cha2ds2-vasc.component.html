@@ -1,0 +1,75 @@
+<div class="container mt-4" style="max-width: 600px;">
+  <h4 class="text-center mb-4">CHA₂DS₂-VASc Score</h4>
+
+  <form (ngSubmit)="calculate()" #form="ngForm" class="p-3 border rounded shadow-sm bg-light">
+
+    <!-- AGE -->
+<div class="mb-3">
+  <label class="form-label fw-bold">Age</label>
+  <select class="form-select" [(ngModel)]="ageGroup" name="ageGroup" required>
+    <option [ngValue]="0">&lt; 65 years <span class="badge bg-secondary ms-2">0 pts</span></option>
+    <option [ngValue]="1">65 - 74 years <span class="badge bg-secondary ms-2">+1 pt</span></option>
+    <option [ngValue]="2">&ge; 75 years <span class="badge bg-secondary ms-2">+2 pts</span></option>
+  </select>
+</div>
+
+    <!-- SEX -->
+<div class="mb-3">
+  <label class="form-label fw-bold me-4">Sex</label>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="sex" [(ngModel)]="sex" [value]="'male'" />
+    <label class="form-check-label">Male <span class="badge bg-secondary">0 pts</span></label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="sex" [(ngModel)]="sex" [value]="'female'" />
+    <label class="form-check-label">Female <span class="badge bg-secondary">+1 pt</span></label>
+  </div>
+</div>
+
+    <!-- HISTORY TOGGLES -->
+<div class="form-check form-switch mb-2">
+  <input class="form-check-input" type="checkbox" [(ngModel)]="chf" name="chf" />
+  <label class="form-check-label">Congestive Heart Failure <span class="badge bg-secondary  ms-">+1 pt</span></label>
+</div>
+
+<div class="form-check form-switch mb-2">
+  <input class="form-check-input" type="checkbox" [(ngModel)]="hypertension" name="hypertension" />
+  <label class="form-check-label">Hypertension <span class="badge bg-secondary  ms-">+1 pt</span></label>
+</div>
+
+<div class="form-check form-switch mb-2">
+  <input class="form-check-input" type="checkbox" [(ngModel)]="strokeHistory" name="strokeHistory" />
+  <label class="form-check-label">Stroke/TIA/Thromboembolism <span class="badge bg-secondary  ms-">+2 pts</span></label>
+</div>
+
+<div class="form-check form-switch mb-2">
+  <input class="form-check-input" type="checkbox" [(ngModel)]="vascularDisease" name="vascularDisease" />
+  <label class="form-check-label">Vascular Disease <span class="badge bg-secondary  ms-">+1 pt</span></label>
+</div>
+
+<div class="form-check form-switch mb-3">
+  <input class="form-check-input" type="checkbox" [(ngModel)]="diabetes" name="diabetes" />
+  <label class="form-check-label">Diabetes Mellitus <span class="badge bg-secondary  ms-">+1 pt</span></label>
+</div>
+
+    <!-- SUBMIT -->
+    <button class="btn btn-primary w-100" type="submit">Calculate</button>
+  </form>
+
+  <!-- RESULT -->
+  <div *ngIf="score !== null" class="mt-4 p-3 rounded text-center shadow-sm"
+       [ngClass]="{
+         'bg-success-col': riskLevel === 'Low',
+         'bg-warning-col': riskLevel === 'Moderate',
+         'bg-danger-col': riskLevel === 'High'
+       }">
+    <h5>{{ score }} points</h5>
+    <p class="mb-1">
+      <strong>Risk Level:</strong> {{ riskLevel }}
+    </p>
+    <div *ngIf="getRiskInterpretation()" class="alert alert-info mt-3">
+  {{ getRiskInterpretation() }}
+</div>
+
+  </div>
+</div>

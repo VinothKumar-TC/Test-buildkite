@@ -1,0 +1,106 @@
+<div class="container-fluid py-3">
+  <div class="row g-3">
+    <!-- Campaigns Running -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div
+          class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+        >
+          <span>Campaigns Running</span>
+          <select
+            class="form-select form-select-sm w-auto"
+            [(ngModel)]="campaignRange"
+            (change)="updateCampaignChart()"
+          >
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </div>
+        <div class="card-body">
+          <apx-chart
+            [series]="campaignChart.series!"
+            [chart]="campaignChart.chart!"
+            [xaxis]="campaignChart.xaxis!"
+            [colors]="campaignChart.colors!"
+            [plotOptions]="campaignChart.plotOptions!"
+            [tooltip]="campaignChart.tooltip!"
+            [dataLabels]="campaignChart.dataLabels!"
+          >
+          </apx-chart>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2️⃣ Country Wise -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-success text-white">Country Wise</div>
+        <div class="card-body">
+          <apx-chart
+            [series]="countryChart.series!"
+            [chart]="countryChart.chart!"
+            [labels]="countryChart.labels!"
+            [colors]="countryChart.colors!"
+            [tooltip]="countryChart.tooltip!"
+            [plotOptions]="countryChart.plotOptions!"
+            [responsive]="countryChart.responsive!"
+          >
+          </apx-chart>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3️⃣ Complexity -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-danger text-white">Campaign Complexity</div>
+        <div class="card-body">
+          <apx-chart
+            [series]="complexityChart.series!"
+            [chart]="complexityChart.chart!"
+            [xaxis]="complexityChart.xaxis!"
+            [colors]="complexityChart.colors!"
+            [stroke]="complexityChart.stroke!"
+            [fill]="complexityChart.fill!"
+            [tooltip]="complexityChart.tooltip!"
+          >
+          </apx-chart>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROI of Campaigns -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div
+          class="card-header bg-warning text-dark d-flex justify-content-between align-items-center"
+        >
+          <span>ROI of Campaigns</span>
+          <select
+            class="form-select form-select-sm w-auto"
+            [(ngModel)]="roiRange"
+            (change)="updateROIChart()"
+          >
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </div>
+        <div class="card-body">
+          <apx-chart
+            [series]="roiChart.series!"
+            [chart]="roiChart.chart!"
+            [xaxis]="roiChart.xaxis!"
+            [colors]="roiChart.colors!"
+            [stroke]="roiChart.stroke!"
+            [fill]="roiChart.fill!"
+            [tooltip]="roiChart.tooltip!"
+            [dataLabels]="roiChart.dataLabels!"
+          >
+          </apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
